@@ -7,6 +7,7 @@ const { handleRequest } = createYoga({
   schema: schema,
   logging: "debug",
   graphiql: true,
+  landingPage: false,
 
   fetchAPI: {
     Response,
