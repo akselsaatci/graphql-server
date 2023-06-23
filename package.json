@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "codegen" : "npx graphql-codegen"
+    "codegen": "npx graphql-codegen"
   },
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
@@ -32,6 +32,7 @@
   },
   "devDependencies": {
     "@eddeee888/gcg-typescript-resolver-files": "^0.5.0",
+    "@faker-js/faker": "^8.0.2",
     "@graphql-codegen/cli": "^4.0.1"
   }
 }

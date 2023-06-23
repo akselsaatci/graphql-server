@@ -1,63 +1,50 @@
 import { PrismaClient } from "@prisma/client";
-
+import { faker } from "@faker-js/faker";
 const prisma = new PrismaClient();
 
 async function main() {
-  const alice = await prisma.user.upsert({
-    where: { email: "alice@prisma.io" },
+  for (let i = 0; i < 50; i++) {
+    const email = faker.internet.email();
+    const temp = await prisma.user.upsert({
+      where: { email: email },
 
-    update: {},
+      update: {},
 
-    create: {
-      email: "alice@prisma.io",
+      create: {
+        email: email,
 
-      name: "Alice",
+        name: faker.person.firstName(),
 
-      posts: {
-        create: {
-          title: "Check out Prisma with Next.js",
+        posts: {
+          createMany: {
+            data: [
+              {
+                title: faker.lorem.sentence(),
 
-          content: "https://www.prisma.io/nextjs",
+                content: faker.lorem.paragraphs(3),
 
-          published: true,
+                published: true,
+              },
+              {
+                title: faker.lorem.sentence(),
+
+                content: faker.lorem.paragraphs(3),
+
+                published: true,
+              },
+              {
+                title: faker.lorem.sentence(),
+
+                content: faker.lorem.paragraphs(3),
+
+                published: true,
+              },
+            ],
+          },
         },
       },
-    },
-  });
-
-  const bob = await prisma.user.upsert({
-    where: { email: "bob@prisma.io" },
-
-    update: {},
-
-    create: {
-      email: "bob@prisma.io",
-
-      name: "Bob",
-
-      posts: {
-        create: [
-          {
-            title: "Follow Prisma on Twitter",
-
-            content: "https://twitter.com/prisma",
-
-            published: true,
-          },
-
-          {
-            title: "Follow Nexus on Twitter",
-
-            content: "https://twitter.com/nexusgql",
-
-            published: true,
-          },
-        ],
-      },
-    },
-  });
-
-  console.log({ alice, bob });
+    });
+  }
 }
 
 main()
