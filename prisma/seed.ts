@@ -5,45 +5,45 @@ const prisma = new PrismaClient();
 async function main() {
   for (let i = 0; i < 50; i++) {
     const email = faker.internet.email();
-    const temp = await prisma.user.upsert({
-      where: { email: email },
+    // const temp = await prisma.user.upsert({
+    //   where: { email: email },
 
-      update: {},
+    //   update: {},
 
-      create: {
-        email: email,
+    //   create: {
+    //     email: email,
 
-        name: faker.person.firstName(),
+    //     name: faker.person.firstName(),
 
-        posts: {
-          createMany: {
-            data: [
-              {
-                title: faker.lorem.sentence(),
+    //     posts: {
+    //       createMany: {
+    //         data: [
+    //           {
+    //             title: faker.lorem.sentence(),
 
-                content: faker.lorem.paragraphs(3),
+    //             content: faker.lorem.paragraphs(3),
 
-                published: true,
-              },
-              {
-                title: faker.lorem.sentence(),
+    //             published: true,
+    //           },
+    //           {
+    //             title: faker.lorem.sentence(),
 
-                content: faker.lorem.paragraphs(3),
+    //             content: faker.lorem.paragraphs(3),
 
-                published: true,
-              },
-              {
-                title: faker.lorem.sentence(),
+    //             published: true,
+    //           },
+    //           {
+    //             title: faker.lorem.sentence(),
 
-                content: faker.lorem.paragraphs(3),
+    //             content: faker.lorem.paragraphs(3),
 
-                published: true,
-              },
-            ],
-          },
-        },
-      },
-    });
+    //             published: true,
+    //           },
+    //         ],
+    //       },
+    //     },
+    //   },
+    // });
   }
 }
 
